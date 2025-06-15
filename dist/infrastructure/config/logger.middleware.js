@@ -13,11 +13,11 @@ let LoggerMiddleware = class LoggerMiddleware {
         this.logger = new common_1.Logger('HTTP');
     }
     use(req, res, next) {
-        this.logger.log(`[RUN_INI]`);
+        this.logger.log(`[RUN_INIT]`);
         next();
         res.on('finish', () => {
             this.logger.log(`[StatusCodeResponse]: ${res.statusCode.toString()} | [URL]: ${req.originalUrl} | [BODY]: ${JSON.stringify(req.body)}`);
-            this.logger.log(`[RUN_FINOK]`);
+            this.logger.log(`[RUN_FIN_OK]`);
         });
     }
 };

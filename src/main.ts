@@ -4,6 +4,7 @@ import { ValidationPipe } from '@nestjs/common';
 import * as process from 'process';
 import { LoggerCustomService } from '@infrastructure/shared/services/logger-custom.service';
 import { NestExpressApplication } from '@nestjs/platform-express';
+import mongoose from "mongoose";
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -13,7 +14,13 @@ async function bootstrap() {
 
   app.enableCors();
   app.setGlobalPrefix('api-qb');
-  app.useGlobalPipes(new ValidationPipe({ transform: true }));
+  app.useGlobalPipes(new ValidationPipe({
+    whitelist: true,
+    forbidNonWhitelisted: true,
+    transform: true,
+  }));
+
+  if (true) mongoose.set('debug', true);
 
   app.set('trust proxy', 'loopback');
   await app.listen(process.env.APP_PORT || 8000);

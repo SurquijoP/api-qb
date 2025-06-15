@@ -22,7 +22,7 @@ export class LoggerCustomService extends ConsoleLogger {
   }
 
   /**
-   * Custom information log configuration for the application.
+   * Custom information log configuration for the adapters.
    *
    * @param {string} method name of the method to be logged
    * @param {string} [message] optional log message
@@ -41,7 +41,7 @@ export class LoggerCustomService extends ConsoleLogger {
   }
 
   /**
-   * Custom information log configuration for the application.
+   * Custom information log configuration for the adapters.
    *
    * @param {string} method name of the method to be logged
    * @param {string} [message] optional log message
@@ -60,7 +60,7 @@ export class LoggerCustomService extends ConsoleLogger {
   }
 
   /**
-   * Custom error log configuration for the application.
+   * Custom error log configuration for the adapters.
    *
    * @param {string} method name of the method to be logged
    * @param {*} [message] message of the error or exceptions.

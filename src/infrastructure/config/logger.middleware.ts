@@ -6,13 +6,13 @@ export class LoggerMiddleware implements NestMiddleware {
   private logger = new Logger('HTTP');
 
   use(req: Request, res: Response, next: NextFunction) {
-    this.logger.log(`[RUN_INI]`);
+    this.logger.log(`[RUN_INIT]`);
     next();
     res.on('finish', () => {
       this.logger.log(
         `[StatusCodeResponse]: ${res.statusCode.toString()} | [URL]: ${req.originalUrl} | [BODY]: ${JSON.stringify(req.body)}`,
       );
-      this.logger.log(`[RUN_FINOK]`);
+      this.logger.log(`[RUN_FIN_OK]`);
     });
   }
 }

@@ -21,7 +21,8 @@
       "@infrastructure/*": ["./src/infrastructure/*"],
       "@configs-domain/*": ["./src/domain/config/domain/*"],
       "@configs-infrastructure/*": ["./src/domain/config/infrastructure/*"],
-      "@shared/*": ["./src/infrastructure/shared/*"]
+      "@shared/*": ["./src/infrastructure/shared/*"],
+      "@users/*": ["./src/domain/users*"]
     }
   }
 }

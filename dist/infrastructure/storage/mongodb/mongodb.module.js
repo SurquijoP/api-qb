@@ -9,14 +9,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.MongodbModule = void 0;
 const common_1 = require("@nestjs/common");
 const mongodb_decorator_1 = require("./decorators/mongodb.decorator");
+const mongoose_1 = require("@nestjs/mongoose");
+const users_schema_1 = require("../../../domain/users/core/domain/schema/users.schema");
+const globals_constants_1 = require("../../shared/constants/globals.constants");
 let MongodbModule = class MongodbModule {
 };
 exports.MongodbModule = MongodbModule;
 exports.MongodbModule = MongodbModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            mongodb_decorator_1.MongoDBModuleConfig
-        ]
+            mongodb_decorator_1.MongoDBModuleConfig,
+            mongoose_1.MongooseModule.forFeature([{ name: users_schema_1.User.name, schema: users_schema_1.UserSchema, collection: globals_constants_1.USERS_COLLECTION }]),
+        ],
+        exports: [mongoose_1.MongooseModule],
     })
 ], MongodbModule);
 //# sourceMappingURL=mongodb.module.js.map

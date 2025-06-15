@@ -4,6 +4,8 @@ import {HealthModule} from "./domain/health/health.module";
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import {LoggerMiddleware} from "@infrastructure/config/logger.middleware";
 import {ConfigAppModule} from "@infrastructure/config/configAppModule";
+import {UserModule} from "@users//users.module";
+import {AuthModule} from "./domain/auth/auth.module";
 
 
 
@@ -11,7 +13,10 @@ import {ConfigAppModule} from "@infrastructure/config/configAppModule";
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     HealthModule,
-    ConfigAppModule
+    ConfigAppModule,
+    MongodbModule,
+    UserModule,
+    AuthModule,
   ],
 })
 export class AppModule implements NestModule {
