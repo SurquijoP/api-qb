@@ -6,6 +6,7 @@ import {LoggerMiddleware} from "@infrastructure/config/logger.middleware";
 import {ConfigAppModule} from "@infrastructure/config/configAppModule";
 import {UserModule} from "@users//users.module";
 import {AuthModule} from "./domain/auth/auth.module";
+import {OrderModule} from "./domain/order/order.module";
 
 
 
@@ -17,6 +18,7 @@ import {AuthModule} from "./domain/auth/auth.module";
     MongodbModule,
     UserModule,
     AuthModule,
+    OrderModule,
   ],
 })
 export class AppModule implements NestModule {

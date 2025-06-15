@@ -6,10 +6,16 @@ import {JwtService} from "@nestjs/jwt";
 import {User} from "@users//core/domain/schema/users.schema";
 import {EXPIRES_IN_JWT} from "@shared/constants/globals.constants";
 import {AuthServicePort} from "../ports/in/services";
+import {LoggerCustomService} from "@shared/services/logger-custom.service";
+import {GENERAL_ERROR_LOGIN_MSG} from "@shared/constants/errors";
+import {UserDto} from "@users//core/domain/dto/users";
 
 
 @Injectable()
 export class AuthService implements AuthServicePort {
+    private readonly logger: LoggerCustomService = new LoggerCustomService(
+        AuthService.name,
+    );
     constructor(
         @Inject()
         private readonly findOneUserRepository: FindOneUserRepository,
@@ -17,11 +23,18 @@ export class AuthService implements AuthServicePort {
     ) {}
 
     async logIn(loginInput: UserLoginDto): Promise<UserLoginResponseDto> {
-        const user: User = await this.findOneUserRepository.findByUser(loginInput.user);
-        if (!user) throw new UnauthorizedException('Usuario no encontrado');
+
+        const user: UserDto = await this.findOneUserRepository.findByUser(loginInput.user);
+        if (!user) {
+            this.logger.warn("[logIn] Usuario no encontrado: ", loginInput.user);
+            throw new UnauthorizedException(GENERAL_ERROR_LOGIN_MSG)
+        };
 
         const valid = await this.validatePassword(loginInput.password, user.password);
-        if (!valid) throw new UnauthorizedException('Contraseña incorrecta');
+        if (!valid) {
+            this.logger.warn("[logIn] Contraseña incorrecta: ", loginInput.user);
+            throw new UnauthorizedException(GENERAL_ERROR_LOGIN_MSG);
+        }
 
         const payload : TokenClaims  = {
             sub: user._id,

@@ -15,6 +15,7 @@ const logger_middleware_1 = require("./infrastructure/config/logger.middleware")
 const configAppModule_1 = require("./infrastructure/config/configAppModule");
 const users_module_1 = require("./domain/users/users.module");
 const auth_module_1 = require("./domain/auth/auth.module");
+const order_module_1 = require("./domain/order/order.module");
 let AppModule = class AppModule {
     configure(consumer) {
         consumer.apply(logger_middleware_1.LoggerMiddleware).forRoutes('*');
@@ -30,6 +31,7 @@ exports.AppModule = AppModule = __decorate([
             mongodb_module_1.MongodbModule,
             users_module_1.UserModule,
             auth_module_1.AuthModule,
+            order_module_1.OrderModule,
         ],
     })
 ], AppModule);

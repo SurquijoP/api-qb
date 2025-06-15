@@ -12,6 +12,7 @@ const mongodb_decorator_1 = require("./decorators/mongodb.decorator");
 const mongoose_1 = require("@nestjs/mongoose");
 const users_schema_1 = require("../../../domain/users/core/domain/schema/users.schema");
 const globals_constants_1 = require("../../shared/constants/globals.constants");
+const order_schema_1 = require("../../../domain/order/core/domain/schema/order.schema");
 let MongodbModule = class MongodbModule {
 };
 exports.MongodbModule = MongodbModule;
@@ -20,6 +21,7 @@ exports.MongodbModule = MongodbModule = __decorate([
         imports: [
             mongodb_decorator_1.MongoDBModuleConfig,
             mongoose_1.MongooseModule.forFeature([{ name: users_schema_1.User.name, schema: users_schema_1.UserSchema, collection: globals_constants_1.USERS_COLLECTION }]),
+            mongoose_1.MongooseModule.forFeature([{ name: order_schema_1.Order.name, schema: order_schema_1.OrderSchema, collection: globals_constants_1.ORDERS_COLLECTION }]),
         ],
         exports: [mongoose_1.MongooseModule],
     })
