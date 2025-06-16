@@ -16,6 +16,8 @@ const configAppModule_1 = require("./infrastructure/config/configAppModule");
 const users_module_1 = require("./domain/users/users.module");
 const auth_module_1 = require("./domain/auth/auth.module");
 const order_module_1 = require("./domain/order/order.module");
+const jwt_guard_1 = require("./infrastructure/guard/jwt.guard");
+const core_1 = require("@nestjs/core");
 let AppModule = class AppModule {
     configure(consumer) {
         consumer.apply(logger_middleware_1.LoggerMiddleware).forRoutes('*');
@@ -33,6 +35,12 @@ exports.AppModule = AppModule = __decorate([
             auth_module_1.AuthModule,
             order_module_1.OrderModule,
         ],
+        providers: [
+            {
+                provide: core_1.APP_GUARD,
+                useClass: jwt_guard_1.JwtAuthGuard,
+            },
+        ]
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map

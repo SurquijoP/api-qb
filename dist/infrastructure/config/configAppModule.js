@@ -10,6 +10,9 @@ exports.ConfigAppModule = void 0;
 const common_1 = require("@nestjs/common");
 const logger_custom_service_1 = require("../shared/services/logger-custom.service");
 const axios_1 = require("@nestjs/axios");
+const core_1 = require("@nestjs/core");
+const jwt_guard_1 = require("../guard/jwt.guard");
+const jwt_1 = require("@nestjs/jwt");
 let ConfigAppModule = class ConfigAppModule {
 };
 exports.ConfigAppModule = ConfigAppModule;
@@ -22,9 +25,17 @@ exports.ConfigAppModule = ConfigAppModule = __decorate([
                     maxRedirects: 5,
                 }),
             }),
+            jwt_1.JwtModule.register({
+                secret: process.env.JWT_SECRET || 'supersecreto',
+                signOptions: { expiresIn: '30d' },
+            }),
         ],
-        providers: [logger_custom_service_1.LoggerCustomService],
-        exports: [logger_custom_service_1.LoggerCustomService],
+        providers: [logger_custom_service_1.LoggerCustomService, core_1.Reflector,
+            {
+                provide: core_1.APP_GUARD,
+                useClass: jwt_guard_1.JwtAuthGuard,
+            },],
+        exports: [logger_custom_service_1.LoggerCustomService, jwt_1.JwtModule],
     })
 ], ConfigAppModule);
 //# sourceMappingURL=configAppModule.js.map

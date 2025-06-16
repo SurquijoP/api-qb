@@ -7,7 +7,8 @@ import {ConfigAppModule} from "@infrastructure/config/configAppModule";
 import {UserModule} from "@users//users.module";
 import {AuthModule} from "./domain/auth/auth.module";
 import {OrderModule} from "./domain/order/order.module";
-
+import {JwtAuthGuard} from "@infrastructure/guard/jwt.guard";
+import { APP_GUARD } from '@nestjs/core';
 
 
 @Module({
@@ -19,7 +20,14 @@ import {OrderModule} from "./domain/order/order.module";
     UserModule,
     AuthModule,
     OrderModule,
+
   ],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
+  ]
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
