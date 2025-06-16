@@ -1,6 +1,7 @@
-import {FilterRule} from "@shared/dto/filter-rule";
-import {OrderDto} from "../../domain/dto/order";
+import {FilterInputPaginationDto} from "@shared/dto/filter-rule";
+import {OrderResponseDto} from "../../domain/dto/order";
+
 
 export interface OrderControllerPort {
-    login(body: FilterRule[]) : Promise<OrderDto[]>
+    findOrders(body: FilterInputPaginationDto) : Promise<OrderResponseDto>
 }

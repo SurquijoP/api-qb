@@ -25,3 +25,8 @@ export interface OrderDto {
     conversationId: string;
     products: OrderProductDto[];
 }
+
+export interface OrderResponseDto {
+    orders: OrderDto[];
+    total: number;
+}

@@ -1,6 +1,6 @@
-import {FilterRule} from "@shared/dto/filter-rule";
-import {Order} from "../../domain/schema/order.schema";
+import {FilterInputPaginationDto, FilterRule} from "@shared/dto/filter-rule";
+import {OrderResponseDto} from "../../domain/dto/order";
 
 export interface FindOrdersRepositoryPort {
-    findOrders(ordersFilters: FilterRule[]): Promise<Order[] | null>
+    findOrders(ordersFilters: FilterInputPaginationDto): Promise<OrderResponseDto>
 }
